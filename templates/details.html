@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+  <p class="eyebrow">Hi, {{ user }}</p>
+  <h1>Account {{ account_number }}</h1>
+  <p class="balance">${{ balance }}</p>
+  <nav class="actions">
+    <a class="button-link" href="{{ url_for('transfer') }}">Transfer</a>
+    <a href="{{ url_for('dashboard') }}">Back to dashboard</a>
+  </nav>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="topbar">
+    <div>
+      <p class="eyebrow">Logged in as</p>
+      <h1>{{ email }}</h1>
+    </div>
+    <form method="post" action="{{ url_for('logout') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <button class="secondary" type="submit">Logout</button>
+    </form>
+  </div>
+
+  <h2>Your Accounts</h2>
+  <div class="account-list">
+    {% for account in accounts %}
+      <a class="account" href="{{ url_for('details', account=account.id) }}">
+        <span>Account {{ account.id }}</span>
+        <strong>${{ account.balance }}</strong>
+      </a>
+    {% endfor %}
+  </div>
+
+  <a class="button-link" href="{{ url_for('transfer') }}">Make a Transfer</a>
+{% endblock %}

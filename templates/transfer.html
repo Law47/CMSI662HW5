@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Make a Transfer</h1>
+  <form method="post" action="{{ url_for('transfer') }}">
+    <!-- Without this token, another site could POST with the user's cookies. -->
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>
+      From
+      <select name="from" required>
+        {% for account in accounts %}
+          <option value="{{ account.id }}">Account {{ account.id }} (${{ account.balance }})</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>
+      To
+      <span class="hint">Type the destination account number.</span>
+      <input name="to" inputmode="numeric" pattern="[0-9]{1,12}" required>
+    </label>
+    <label>
+      Amount
+      <input name="amount" type="number" min="1" max="1000" step="1" required>
+    </label>
+    <button class="transfer-submit" type="submit">Transfer</button>
+  </form>
+  <p class="back-link"><a href="{{ url_for('dashboard') }}">Back to dashboard</a></p>
+{% endblock %}

@@ -1,0 +1,4 @@
+Flask==3.0.3
+Flask-WTF==1.2.1
+PyJWT==2.8.0
+passlib==1.7.4
